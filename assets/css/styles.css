@@ -35,6 +35,14 @@ body,
     text-align: right;
 }
 
+* {
+    font-family: sahel;
+}
+
+*:focus {
+    outline: none;
+}
+
 .mapContainer {
     position: fixed;
     top: 0;
@@ -70,4 +78,154 @@ body,
     font-family: sahel;
     opacity: 0.9;
     outline: 0;
+}
+
+.modal-overlay {
+    position: fixed;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-overlay .modal {
+    width: 50%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+@media only screen and (min-width: 1400px) {
+    .modal-overlay .modal {
+        width: 25%;
+    }
+    input#l-title {
+        width: calc(97% - 15px);
+    }
+    select#l-type {
+        width: calc(97% + 7px);
+    }
+    input[type="submit"] {
+        width: calc(97% + 6px) !important;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .modal-overlay .modal {
+        width: 85%;
+    }
+    #lat-display,
+    #lng-display {
+        width: 90px !important;
+        direction: ltr;
+    }
+    input#l-title {
+        width: calc(97% - 30px);
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    #lat-display,
+    #lng-display {
+        width: 120px !important;
+        direction: ltr;
+    }
+    input#l-title {
+        width: calc(97% - 30px);
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    #lat-display,
+    #lng-display {
+        width: 100px !important;
+        direction: ltr;
+    }
+    input#l-title {
+        width: calc(97% - 30px);
+    }
+}
+
+.modal-overlay .modal .close {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #a90909;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-overlay .modal .close img {
+    width: 20px;
+    height: 20px;
+}
+
+.modal-overlay .modal h3.modal-title {
+    padding: 0;
+    margin: 0 0 30px 0;
+    color: #2196f3;
+}
+
+.field-row {
+    margin: 10px 0;
+}
+
+.field-row::after {
+    content: ' ';
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.field-row div.field-title {
+    width: 20%;
+    float: right;
+}
+
+.field-row div.field-content {
+    width: 80%;
+    float: right;
+}
+
+.field-row textarea,
+.field-row select,
+.field-row input {
+    line-height: 36px;
+    padding: 0 10px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    border: 1px solid #e7e7e7;
+    font-size: 16px;
+    font-weight: 400;
+    width: 97%;
+}
+
+input[type="submit"] {
+    background: #2195f31f;
+    color: #2196f3;
+    cursor: pointer;
+    font-size: 20px;
+    border-color: #2195f31f;
+}
+
+input[type="submit"]:hover {
+    background-color: #2196f3;
+    color: #ffffff;
+    border-color: #2196f3;
+}
+
+select#l-type {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.ajax-result {
+    text-align: center;
 }

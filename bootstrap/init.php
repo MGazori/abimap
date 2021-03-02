@@ -11,3 +11,4 @@ try {
     diePage('Connection failed: ' . $e->getMessage());
 }
 
+include BASE_PATH . "libs/lib-locations.php";
