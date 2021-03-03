@@ -19,36 +19,42 @@
             <a class="statusToggle <?= $params ? 'active' : '' ?>" href="?verify=1">فعال</a>
             <a class="statusToggle <?php if (isset($params) and $params == 0) {
                                         echo 'active';
-                                    } ?>" href="?verify=0">غیرفعال</a>
+                                    } ?>" href="?verify=0">غیر فعال</a>
             <a class="statusToggle" href="?logout=1" style="float:left">خروج</a>
         </div>
-        <div class="box">
-            <table class="tabe-locations">
-                <thead>
-                    <tr>
-                        <th style="width:40%">عنوان مکان</th>
-                        <th style="width:25%" class="text-center">تاریخ ثبت</th>
-                        <th style="width:10%" class="text-center">lat</th>
-                        <th style="width:10%" class="text-center">lng</th>
-                        <th style="width:15%">وضعیت</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($locations as $location) : ?>
+        <?php if ($locations) : ?>
+            <div class="box">
+                <table class="tabe-locations">
+                    <thead>
                         <tr>
-                            <td><?= $location->title ?></td>
-                            <td style="direction: ltr;" class="text-center"><?= $location->created_at ?></td>
-                            <td class="text-center"><?= $location->lat ?></td>
-                            <td class="text-center"><?= $location->lng ?></td>
-                            <td>
-                                <button class="statusToggle <?= $location->is_verified ? 'active' : '' ?>" data-loc="<?= $location->id ?>">تایید</button>
-                                <button class="preview" data-loc="<?= $location->id ?>">👁️‍🗨️</button>
-                            </td>
+                            <th style="width:40%">عنوان مکان</th>
+                            <th style="width:25%" class="text-center">تاریخ ثبت</th>
+                            <th style="width:10%" class="text-center">lat</th>
+                            <th style="width:10%" class="text-center">lng</th>
+                            <th style="width:15%">وضعیت</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($locations as $location) : ?>
+                            <tr>
+                                <td><?= $location->title ?></td>
+                                <td style="direction: ltr;" class="text-center"><?= $location->created_at ?></td>
+                                <td class="text-center"><?= $location->lat ?></td>
+                                <td class="text-center"><?= $location->lng ?></td>
+                                <td>
+                                    <button class="statusToggle verifyToggle <?= $location->is_verified ? 'active' : '' ?>" data-loc="<?= $location->id ?>"><?= $location->is_verified ? 'فعال' : 'غیر فعال' ?></button>
+                                    <button class="preview" data-loc="<?= $location->id ?>" title="مشاهده بر روی نقشه">👁️‍🗨️</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else : ?>
+            <div class="box emptyBoxMsg">
+                <h3 class="emptyLocationFilter">موردی جهت نمایش وجود ندارد</h3>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="modal-overlay" style="display: none;">
         <div class="modal">
@@ -61,17 +67,20 @@
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="assets/js/admin-panel.js"></script>
     <script>
         $(document).ready(function() {
             $('.preview').click(function() {
                 $('.modal-overlay').fadeIn(250);
-                $('#mapWindow').attr('src', '<?= BASE_URL ?>');
+                $('#mapWindow').attr('src', '<?= BASE_URL ?>?locationId=' + $(this).attr('data-loc'));
             });
             $('.modal-overlay .close').click(function() {
                 $('.modal-overlay').fadeOut(250);
             });
         });
     </script>
+
 </body>
 
 </html>

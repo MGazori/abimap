@@ -82,3 +82,22 @@ iframe#mapWindow {
 .text-center {
     text-align: center;
 }
+
+.box.emptyBoxMsg {
+    background-color: #ff000014;
+}
+
+.emptyLocationFilter {
+    text-align: center;
+    color: #ff0000;
+}
+
+#swal2-title {
+    font-weight: 500;
+}
+
+@media only screen and (min-width: 1400px) {
+    .modal-overlay .modal {
+        width: 30%;
+    }
+}
