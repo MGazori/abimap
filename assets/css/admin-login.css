@@ -1,0 +1,100 @@
+@font-face {
+    font-family: sahel;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/Sahel-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: sahel;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Sahel.woff') format('woff');
+}
+
+@font-face {
+    font-family: sahel;
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/Sahel-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: sahel;
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/Sahel-Black.woff') format('woff');
+}
+
+* {
+    font-family: sahel;
+}
+
+*:focus {
+    outline: none;
+}
+
+html,
+body,
+.mapContainer {
+    padding: 0;
+    margin: 0;
+    direction: rtl;
+    text-align: right;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+.main-panel {
+    width: 600px;
+    margin: 30px auto;
+}
+
+.box {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px #EEE;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 350px;
+    margin: 20px auto;
+}
+
+input {
+    border-radius: 5px;
+    border: 1px solid #b9daf8;
+    font-size: 20px;
+    width: 100%;
+    text-align: left;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    margin: 5px;
+    direction: ltr;
+}
+
+input[type="submit"] {
+    background: #2195f31f;
+    color: #2196f3;
+    cursor: pointer;
+    font-size: 20px;
+    border-color: #2195f31f;
+}
+
+input[type="submit"]:hover {
+    background-color: #2196f3;
+    color: #ffffff;
+    border-color: #2196f3;
+}

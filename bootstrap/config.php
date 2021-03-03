@@ -7,3 +7,6 @@ $database_config = (object)[
     'dbname' => 'abimap',
     'charset' => 'utf8mb4'
 ];
+$siteAdmin = [
+    'm.gazori' => '$2y$10$PuoVPuX5HlI4kk2ZmeIUYOBCRtZ7jnuMoxv2BkzTwprb/Nlziizju'
+];
