@@ -14,9 +14,12 @@
     <div class="main-panel">
         <h1>پنل مدیریت <span style="color:#007bec">آبی مپ</span></h1>
         <div class="box">
-            <a class="statusToggle" href="<?= BASE_URL ?>" target="_blank">🏠</a>
-            <a class="statusToggle active" href="?status=1">فعال</a>
-            <a class="statusToggle" href="?status=0">غیرفعال</a>
+            <a class="statusToggle" href="<?= BASE_URL ?>" target="_blank">🏠 خانه</a>
+            <a class="statusToggle <?= $activeAllFilterLocations ?>" href="<?= BASE_URL ?>adm.php">همه</a>
+            <a class="statusToggle <?= $params ? 'active' : '' ?>" href="?verify=1">فعال</a>
+            <a class="statusToggle <?php if (isset($params) and $params == 0) {
+                                        echo 'active';
+                                    } ?>" href="?verify=0">غیرفعال</a>
             <a class="statusToggle" href="?logout=1" style="float:left">خروج</a>
         </div>
         <div class="box">
@@ -24,26 +27,25 @@
                 <thead>
                     <tr>
                         <th style="width:40%">عنوان مکان</th>
-                        <th style="width:15%" class="text-center">تاریخ ثبت</th>
+                        <th style="width:25%" class="text-center">تاریخ ثبت</th>
                         <th style="width:10%" class="text-center">lat</th>
                         <th style="width:10%" class="text-center">lng</th>
-                        <th style="width:25%">وضعیت</th>
+                        <th style="width:15%">وضعیت</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i = 0; $i < 10; $i++) : ?>
+                    <?php foreach ($locations as $location) : ?>
                         <tr>
-                            <td>نام مکان اینجا</td>
-                            <td class="text-center">12 خرداد 95</td>
-                            <td class="text-center">25.454</td>
-                            <td class="text-center">34.456</td>
+                            <td><?= $location->title ?></td>
+                            <td style="direction: ltr;" class="text-center"><?= $location->created_at ?></td>
+                            <td class="text-center"><?= $location->lat ?></td>
+                            <td class="text-center"><?= $location->lng ?></td>
                             <td>
-                                <button class="statusToggle active" data-loc='111'>فعال</button>
-                                <button class="statusToggle" data-loc='111'>غیر فعال</button>
-                                <button class="preview" data-loc='111'>👁️‍🗨️</button>
+                                <button class="statusToggle <?= $location->is_verified ? 'active' : '' ?>" data-loc="<?= $location->id ?>">تایید</button>
+                                <button class="preview" data-loc="<?= $location->id ?>">👁️‍🗨️</button>
                             </td>
                         </tr>
-                    <?php endfor; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

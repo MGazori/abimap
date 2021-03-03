@@ -29,11 +29,13 @@ table.tabe-locations {
 }
 
 .statusToggle {
+    min-width: 70px;
+    text-align: center;
     background: #eee;
     color: #686868;
     border: 0;
     padding: 3px 12px;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 13px;
     font-weight: 400;
