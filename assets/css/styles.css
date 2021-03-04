@@ -229,3 +229,19 @@ select#l-type {
 .ajax-result {
     text-align: center;
 }
+
+img.geolocation-btn {
+    z-index: 999;
+    position: fixed;
+    width: 18px;
+    bottom: 80px;
+    left: 9px;
+    background-color: #ffffff;
+    padding: 7px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+img.geolocation-btn:hover {
+    cursor: pointer;
+}

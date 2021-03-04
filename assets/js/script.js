@@ -1,4 +1,6 @@
-var map = L.map('map', { doubleClickZoom: false, zoomControl: false }).setView([35.7015038, 51.3653053], 18);
+const defaultLocation = [35.7015038, 51.3653053];
+const defaultZoom = 18;
+var map = L.map('map', { doubleClickZoom: false, zoomControl: false }).setView(defaultLocation, defaultZoom);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'This Open Source Project Developed In Beta Version By <a href="https://mgazori.com" target="_blank">Mohammad Gazori</a>. Go To <a href="https://github.com/mgazori/abimap" target="_blank">GitHub</a>',
     maxZoom: 21,
@@ -36,6 +38,27 @@ $('.modal-overlay .modal span.close').click(function() {
         map.removeLayer(theMarker);
     };
 })
+
+// find Current Location
+var current_position, current_accuracy;
+map.on('locationfound', function(e) {
+    // if position defined, then remove the existing position marker and accuracy circle from the map
+    if (current_position) {
+        map.removeLayer(current_position);
+        map.removeLayer(current_accuracy);
+    }
+    var radius = e.accuracy;
+    current_position = L.marker(e.latlng).addTo(map)
+        .bindPopup("دقت تقریبی: " + radius + " متر").openPopup();
+    current_accuracy = L.circle(e.latlng, radius).addTo(map);
+});
+map.on('locationerror', function(e) {
+    console.log(e.message);
+});
+// wrap map.locate in a function    
+function locate() {
+    map.locate({ setView: true, maxZoom: defaultZoom });
+}
 $(document).ready(function() {
     $('form#addLocationForm').submit(function(e) {
         e.preventDefault();
@@ -49,5 +72,8 @@ $(document).ready(function() {
                 resultTag.html(response);
             }
         });
+    })
+    $('.geolocation-btn').click(function() {
+        locate();
     })
 })
