@@ -28,8 +28,8 @@ map.on('dblclick', function(e) {
     theMarker = L.marker([lat, lng]).addTo(map);
     $('#lat-display').val(lat);
     $('#lng-display').val(lng)
+    $('#l-type').val(0);
     $('#l-title').val('');
-    $('.ajax-result').html('');
     $('.modal-overlay').fadeIn(250);
 });
 $('.modal-overlay .modal span.close').click(function() {
@@ -63,17 +63,62 @@ $(document).ready(function() {
     $('form#addLocationForm').submit(function(e) {
         e.preventDefault();
         var form = $(this);
-        var resultTag = form.find('.ajax-result');
         $.ajax({
             url: form.attr('action'),
             method: form.attr('method'),
             data: form.serialize(),
             success: function(response) {
-                resultTag.html(response);
+                $('.modal-overlay').fadeOut(250);
+                if (theMarker != undefined) {
+                    map.removeLayer(theMarker);
+                };
+                Swal.fire({
+                    icon: 'success',
+                    text: response,
+                    confirmButtonText: 'تایید'
+                })
             }
         });
     })
+    $('#search').keyup(function() {
+        const input = $(this);
+        const searchResult = $('.search-results');
+        searchResult.html('در حال جستجو ...');
+        if (input.val().length > 1) {
+            $.ajax({
+                url: 'process/search.php',
+                method: 'POST',
+                type: 'json',
+                data: {
+                    keyword: input.val()
+                },
+                success: function(response) {
+                    searchResult.slideDown().html(response);
+                    searchLocationView();
+                }
+            });
+        } else {
+            searchResult.slideUp().html('');
+        }
+        if (input.val().length) { $('img.clear-search-btn').fadeIn(); } else { $('img.clear-search-btn').fadeOut(); }
+    });
     $('.geolocation-btn').click(function() {
         locate();
     })
+    $('img.clear-search-btn').click(function() {
+        $('#search').val('');
+        $('img.clear-search-btn').fadeOut();
+        $('.search-results').slideUp().html('');
+    })
+
+    function searchLocationView() {
+        $('.result-item').click(function() {
+            if (theMarker != undefined) {
+                map.removeLayer(theMarker);
+            };
+            const location = $(this);
+            theMarker = L.marker([location.attr('data-lat'), location.attr('data-lng')]).addTo(map).bindPopup(location.children('.loc-title').html()).openPopup();
+            map.setView([location.attr('data-lat'), location.attr('data-lng')], defaultZoom);
+        })
+    }
 })

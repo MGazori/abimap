@@ -15,7 +15,7 @@ if (isLoggedIn()) {
         $params = $_GET['verify'];
         $activeAllFilterLocations = null;
     }
-    $locations = getLocations($params);
+    $locations = getLocations(['verify' => $params]);
     include "tpl/admin-tpl.php";
 } else {
     include "tpl/admin-login-tpl.php";
