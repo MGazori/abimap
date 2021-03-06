@@ -1,5 +1,6 @@
 const defaultLocation = [35.7015038, 51.3653053];
-const defaultZoom = 18;
+const defaultZoom = 14;
+const defaultMarkerZoom = 18;
 var map = L.map('map', { doubleClickZoom: false, zoomControl: false }).setView(defaultLocation, defaultZoom);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'This Open Source Project Developed In Beta Version By <a href="https://mgazori.com" target="_blank">Mohammad Gazori</a>. Go To <a href="https://github.com/mgazori/abimap" target="_blank">GitHub</a>',
@@ -57,7 +58,7 @@ map.on('locationerror', function(e) {
 });
 // wrap map.locate in a function    
 function locate() {
-    map.locate({ setView: true, maxZoom: defaultZoom });
+    map.locate({ setView: true, maxZoom: defaultMarkerZoom });
 }
 $(document).ready(function() {
     $('form#addLocationForm').submit(function(e) {
@@ -118,7 +119,7 @@ $(document).ready(function() {
             };
             const location = $(this);
             theMarker = L.marker([location.attr('data-lat'), location.attr('data-lng')]).addTo(map).bindPopup(location.children('.loc-title').html()).openPopup();
-            map.setView([location.attr('data-lat'), location.attr('data-lng')], defaultZoom);
+            map.setView([location.attr('data-lat'), location.attr('data-lng')], defaultMarkerZoom);
         })
     }
 })

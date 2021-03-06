@@ -227,7 +227,7 @@ select#l-type {
 }
 
 img.geolocation-btn {
-    z-index: 999;
+    z-index: 998;
     position: fixed;
     width: 18px;
     bottom: 80px;
@@ -308,4 +308,24 @@ img.clear-search-btn {
     cursor: pointer;
     filter: grayscale(1);
     opacity: 0.4;
+}
+
+@media only screen and (max-width: 500px) {
+    .head #search {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .head {
+        width: 100%;
+        top: 0px;
+    }
+    .search-results {
+        margin: -3px 0 0 0;
+    }
+    .leaflet-bottom.leaflet-left {
+        bottom: 30px;
+    }
+    img.geolocation-btn {
+        bottom: 110px;
+    }
 }
