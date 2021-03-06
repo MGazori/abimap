@@ -328,4 +328,7 @@ img.clear-search-btn {
     img.geolocation-btn {
         bottom: 110px;
     }
+    .result-item {
+        max-width: 500px;
+    }
 }
